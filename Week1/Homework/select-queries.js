@@ -17,7 +17,7 @@ const queries = {
   POPULATION_GREATER_8MILLION: `SELECT name, population FROM country WHERE population > 8000000 ORDER BY population DESC;`,
   COUNTRIES_HAVE_LAND: `SELECT name FROM country WHERE name LIKE '%land%';`,
   CITIES_POPULATION: `SELECT name, population FROM city WHERE population BETWEEN 500000 AND 1000000 ORDER BY population DESC;`,
-  COUNTRIES_OF_EUROPE: `SELECT name FROM country WHERE continent = 'Europe';`,
+  COUNTRIES_OF_EUROPE: `SELECT name FROM country WHERE continent = 'Europe' ORDER BY name ASC;`,
   COUNTRIES_BY_AREA: `SELECT name, SurfaceArea FROM country ORDER BY SurfaceArea DESC;`,
   CITIES_OF_NETHERLANDS: `SELECT name FROM city WHERE CountryCode = 'NLD' ORDER BY name ASC;`,
   POPULATION_OF_ROTTERDAM: `SELECT population FROM city WHERE name = 'Rotterdam';`,
@@ -78,7 +78,7 @@ async function executeSelectQueries() {
       console.log(city.population);
     });
 
-    const query8 = await execQuery(queries.COUNTRIES_BY_AREA);
+    const query8 = await execQuery(queries.TOP_10_COUNTRIES_AREA);
     console.log('\nThe top 10 countries based on surface area are:');
     query8.forEach(country => {
       console.log(`${country.name}    =>   ${country.SurfaceArea}`);
